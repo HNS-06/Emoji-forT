@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔮 Emoji Fortune Teller</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🔮 Emoji Fortune Teller</h1>
+    <p class="subtitle">Type or speak your name and discover your ridiculous future...</p>
+
+    <input type="text" id="nameInput" placeholder="Enter your name" autocomplete="off" />
+
+    <div class="button-group">
+      <button id="getFortuneBtn" onclick="getFortune()">✨ Reveal My Fortune</button>
+      <button id="voiceBtn" onclick="startVoiceInput()">🎤 Speak</button>
+      <button id="shareBtn" onclick="shareFortune()" style="display: none;">📤 Share</button>
+    </div>
+
+    <div id="fortuneOutput" class="fortune-output"></div>
+
+    <!-- Optional: Add loading / animation area -->
+    <div id="fortuneAnimation" class="fortune-animation"></div>
+  </div>
+
+  <!-- Emoji rain overlay -->
+  <div class="emoji-rain"></div>
+
+  <!-- Optional animation libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
