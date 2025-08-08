@@ -17,20 +17,23 @@ async function getFortune() {
     const data = await response.json();
     if (!data || !data.emojis || !data.interpretation) {
       throw new Error("Invalid response from server");
-    }
+    } 
 
     const fortuneEl = document.getElementById("fortuneOutput");
     fortuneEl.innerHTML = `
-      <div class="fortune-emojis">${data.emojis.join(" ")}</div>
-      <div class="fortune-text">🌟 ${data.interpretation}</div>
+      <div class="fortune-text">${data.interpretation}</div>
     `;
 
     document.getElementById("shareBtn").style.display = "inline-block";
+
+    // Start emoji rain animation with backend's emojis
     startEmojiRain(data.emojis);
+
   } catch (error) {
     console.error("Error fetching fortune:", error);
     document.getElementById("fortuneOutput").innerText = "⚠️ Failed to fetch your fortune.";
   }
+  
 }
 
 function shareFortune() {
@@ -60,6 +63,7 @@ function startEmojiRain(emojis) {
     emoji.style.animation = `fall ${3 + Math.random() * 3}s linear infinite`;
     emoji.style.fontSize = `${24 + Math.random() * 24}px`;
     emoji.style.top = "-50px";
+
     rainContainer.appendChild(emoji);
   }
 }
@@ -68,19 +72,17 @@ function startVoiceInput() {
   const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
   recognition.lang = "en-US";
   recognition.start();
-
   recognition.onresult = function (event) {
     const transcript = event.results[0][0].transcript;
     document.getElementById("nameInput").value = transcript;
     getFortune();
   };
-
   recognition.onerror = function (event) {
     console.error("Voice input error:", event);
   };
 }
 
-// Inject styles and animation
+// Inject emoji fall animation keyframes
 const style = document.createElement("style");
 style.innerHTML = `
   @keyframes fall {
@@ -94,16 +96,10 @@ style.innerHTML = `
     z-index: 1000;
   }
 
-  .fortune-emojis {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-
   .fortune-text {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    margin-top: 0.5rem;
-    color: #222;
+    margin-top: 1rem;
   }
 `;
 document.head.appendChild(style);
