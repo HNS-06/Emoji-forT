@@ -8,7 +8,7 @@ async function getFortune() {
   }
 
   try {
-    const response = await fetch('http://localhost:3000/api/fortune', {
+    const response = await fetch('/api/fortune', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name }),
@@ -103,3 +103,4 @@ style.innerHTML = `
   }
 `;
 document.head.appendChild(style);
+
